@@ -1,5 +1,9 @@
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
+
+from login import LoginForm
+from registration import RegistrationForm
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -8,7 +12,9 @@ def index():
 
 @app.route("/foodbank")
 def foodbank():
-    return render_template('foodbank.html')
+    registrationForm = RegistrationForm(request.form);
+    loginForm = LoginForm(request.form);
+    return render_template('foodbank.html', registrationForm=registrationForm, loginForm=loginForm)
 
 @app.route("/donator")
 def donator():
