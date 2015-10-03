@@ -42,7 +42,7 @@ def donator():
 
 @app.route('/receiver')
 def receiver():
-    return render_template('receiver.html')
+    return render_template('esri.html')
 
 if __name__ == '__main__':
     app.debug = True
