@@ -16,7 +16,11 @@ def foodbank():
     registrationForm = RegistrationForm();
     loginForm = LoginForm();
 
-    return render_template('foodbank.html', registrationForm=registrationForm, loginForm=loginForm)
+    user = request.args.get("user")
+    if user:
+        return render_template('foodbank.html', user=user)
+    else:
+        return render_template('foodbankforms.html', registrationForm=registrationForm, loginForm=loginForm)
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -32,9 +36,10 @@ def login():
     loginForm = LoginForm(request.form)
     if loginForm.validate():
         flash('You\'ve been logged in!', 'success')
+        return redirect('/foodbank?user=' + loginForm.username.data)
     else:
         flash('Login failed :(', 'error')
-    return redirect('/foodbank')
+        return redirect('/foodbank')
 
 @app.route('/donator')
 def donator():
