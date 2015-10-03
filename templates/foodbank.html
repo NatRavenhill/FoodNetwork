@@ -25,6 +25,24 @@
                         <button type="submit" class="btn btn-primary">Log in</button>
                     </form>
                 </div>
+                <div class="col-md-6">
+                    <h2>Register</h2>
+                    <form method="POST" action="/register">
+                        <div class="form-group">
+                            <label>{{ registrationForm.username.label }}</label>
+                            {{ registrationForm.username(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <label>{{ registrationForm.password.label }}</label>
+                            {{ registrationForm.password(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <label>{{ registrationForm.confirm.label }}</label>
+                            {{ registrationForm.confirm(class="form-control") }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
             </div>
         </div>
     </body>

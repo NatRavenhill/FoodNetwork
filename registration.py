@@ -1,4 +1,9 @@
-from wtforms import Form, StringField, validators
+from wtforms import Form, StringField, PasswordField, validators
 
 class RegistrationForm(Form):
-    username = StringField('Username', [validators.Length(min=4, max=25)])
+    username = StringField('Email address', [validators.required(), validators.Length(min=4, max=25)])
+    password = PasswordField('Password', [
+        validators.Required(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat password')
