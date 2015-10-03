@@ -27,6 +27,15 @@ def register():
         flash('Registration failed :(', 'error')
     return redirect('/foodbank')
 
+@app.route('/login', methods=['POST'])
+def login():
+    loginForm = LoginForm(request.form)
+    if loginForm.validate():
+        flash('You\'ve been logged in!', 'success')
+    else:
+        flash('Login failed :(', 'error')
+    return redirect('/foodbank')
+
 @app.route('/donator')
 def donator():
     return render_template('donator.html')
