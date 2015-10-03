@@ -6,6 +6,26 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
     </head>
     <body>
-        <h1>Foodbank</h1>
+        <div class="container">
+            <div class="row">
+                <h1>Foodbank</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Log in</h2>
+                    <form method="POST" action="/login">
+                        <div class="form-group">
+                            <label>{{ loginForm.username.label }}</label>
+                            {{ loginForm.username(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <label>{{ loginForm.password.label }}</label>
+                            {{ loginForm.password(class="form-control") }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
