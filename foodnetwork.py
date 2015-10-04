@@ -7,6 +7,8 @@ from text import TextForm
 
 from twilio.rest import TwilioRestClient
 
+import braintree
+
 app = Flask(__name__)
 app.secret_key = 'gfdhajghjarejw ophyugipefqh984372824'
 
@@ -14,6 +16,30 @@ app.secret_key = 'gfdhajghjarejw ophyugipefqh984372824'
 account_sid = "ACabbdc6a9c7645d6a38069ac3fe6c99c5"
 auth_token = "04670510815d4503cdf5f8d5414bdb8a"
 client = TwilioRestClient(account_sid, auth_token)
+
+#info for braintree
+braintree.Configuration.configure(braintree.Environment.Sandbox,
+                                   merchant_id="yb48tgk36vmy35zw",
+	                     public_key = "ddqsprrw4377dv3f",
+                                   private_key="8873838a196e6d67b45a5d2d6ae142d9")
+								 
+#send client token to client
+@app.route("/client_token", methods=["GET"])
+def client_token():
+  return braintree.ClientToken.generate()
+  
+
+@app.route("/checkout", methods=["POST"])
+def create_purchase():
+  nonce = request.form["payment_method_nonce"]
+  result = braintree.Transaction.sale({
+    "amount": "10.00",
+    "payment_method_nonce": "fake-valid-nonce"
+  })
+  if result.is_success:
+      return "<h1>Success! Thank You for your Donation!</h1>"
+  else:
+       return "<h1>Error: {0}</h1>".format(result.message)
 
 @app.route('/')
 def index():
