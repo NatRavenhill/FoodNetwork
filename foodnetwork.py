@@ -43,7 +43,12 @@ def login():
 
 @app.route('/donator')
 def donator():
-    return render_template('donator.html')
+    mostNeededItems = [
+        {'name': 'Milk', 'colour': 'danger'},
+        {'name': 'Pasta', 'colour': 'warning'},
+        {'name': 'Baked beans', 'colour': 'success'}
+    ]
+    return render_template('donator.html', mostNeededItems=mostNeededItems)
 
 @app.route('/receiver')
 def receiver():

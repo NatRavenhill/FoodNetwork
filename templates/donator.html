@@ -3,9 +3,85 @@
     <head>
         <title>Donator | Food Network</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+
+        <script>
+            var caret, updateDateText, updateTimeText;
+
+            caret = ' <span class="caret"></span>';
+
+            updateDateText = function(link) {
+                $('#dateButton').html($(link).text() + caret);
+            };
+
+            updateTimeText = function(link) {
+                $('#timeButton').html($(link).text() + caret);
+            };
+        </script>
     </head>
     <body>
-        <h1>Donator</h1>
+        <div class="container">
+            <h1>Donator</h1>
+            <h3>Most needed items</h3>
+            <div class="btn-group-vertical">
+                {% for item in mostNeededItems %}
+                    <button type="button" class="btn btn-{{ item.colour }}">{{ item.name }}</button>
+                {% endfor %}
+            </div>
+
+            <br/>
+            <br/>
+            <h3>Remind me when I shop</h3>
+            <form method="POST" action="/reminder">
+                <div class="btn-group">
+                    <button id="dateButton" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Monday <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="updateDateText(this)">Monday</a></li>
+                        <li><a onclick="updateDateText(this)">Tuesday</a></li>
+                        <li><a onclick="updateDateText(this)">Wednesday</a></li>
+                        <li><a onclick="updateDateText(this)">Thursday</a></li>
+                        <li><a onclick="updateDateText(this)">Friday</a></li>
+                        <li><a onclick="updateDateText(this)">Saturday</a></li>
+                        <li><a onclick="updateDateText(this)">Sunday</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group">
+                    <button id="timeButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        12:00 <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="updateTimeText(this)">00:00</a></li>
+                        <li><a onclick="updateTimeText(this)">01:00</a></li>
+                        <li><a onclick="updateTimeText(this)">02:00</a></li>
+                        <li><a onclick="updateTimeText(this)">03:00</a></li>
+                        <li><a onclick="updateTimeText(this)">04:00</a></li>
+                        <li><a onclick="updateTimeText(this)">05:00</a></li>
+                        <li><a onclick="updateTimeText(this)">06:00</a></li>
+                        <li><a onclick="updateTimeText(this)">07:00</a></li>
+                        <li><a onclick="updateTimeText(this)">08:00</a></li>
+                        <li><a onclick="updateTimeText(this)">09:00</a></li>
+                        <li><a onclick="updateTimeText(this)">10:00</a></li>
+                        <li><a onclick="updateTimeText(this)">11:00</a></li>
+                        <li><a onclick="updateTimeText(this)">12:00</a></li>
+                        <li><a onclick="updateTimeText(this)">13:00</a></li>
+                        <li><a onclick="updateTimeText(this)">14:00</a></li>
+                        <li><a onclick="updateTimeText(this)">15:00</a></li>
+                        <li><a onclick="updateTimeText(this)">16:00</a></li>
+                        <li><a onclick="updateTimeText(this)">17:00</a></li>
+                        <li><a onclick="updateTimeText(this)">18:00</a></li>
+                        <li><a onclick="updateTimeText(this)">19:00</a></li>
+                        <li><a onclick="updateTimeText(this)">20:00</a></li>
+                        <li><a onclick="updateTimeText(this)">21:00</a></li>
+                        <li><a onclick="updateTimeText(this)">22:00</a></li>
+                        <li><a onclick="updateTimeText(this)">23:00</a></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
     </body>
 </html>
