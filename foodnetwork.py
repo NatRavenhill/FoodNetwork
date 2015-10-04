@@ -23,12 +23,12 @@ def index():
 def foodbank():
     registrationForm = RegistrationForm();
     loginForm = LoginForm();
-
+    textForm = TextForm();
     user = request.args.get("user")
     if user:
-        return render_template('foodbank.html', user=user)
+        return render_template('foodbankText.html', user=user, textForm = textForm)
     else:
-        return render_template('foodbank.html', registrationForm=registrationForm, loginForm=loginForm )
+        return render_template('foodbankforms.html', registrationForm=registrationForm, loginForm=loginForm )
 
 @app.route('/register', methods=['POST'])
 def register():
