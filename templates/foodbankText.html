@@ -20,6 +20,12 @@
           <button type="submit">Send texts!</button>
       </form>
 	 </div>
+     {% if success %}
+        <br/>
+         <div class="row">
+             <div class="alert alert-success">Text message successfully sent!</div>
+         </div>
+     {% endif %}
 	 </div>
 </body>
 </html>

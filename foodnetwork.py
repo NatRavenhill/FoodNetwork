@@ -94,9 +94,9 @@ def text():
     textForm = TextForm(request.form)
     if request.method == 'POST' and  textForm.validate() :
        message = client.messages.create(to="+447784456027", from_="+441922214241", body = textForm.foodbankName.data + " needs some more " + textForm.food.data)
-       return render_template('successText.html')
+       return render_template('foodbankText.html', textForm = textForm, success=True)
     else:
-       return render_template('foodbankText.html', textForm = textForm)
+       return render_template('foodbankText.html', textForm = textForm, success=False)
 
 
 if __name__ == '__main__':
