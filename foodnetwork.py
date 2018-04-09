@@ -8,20 +8,18 @@ from text import TextForm
 from twilio.rest import TwilioRestClient
 
 import braintree
+import config
 
 app = Flask(__name__)
-app.secret_key = 'gfdhajghjarejw ophyugipefqh984372824'
 
 #info for twilio
-account_sid = "ACabbdc6a9c7645d6a38069ac3fe6c99c5"
-auth_token = "04670510815d4503cdf5f8d5414bdb8a"
-client = TwilioRestClient(account_sid, auth_token)
+client = TwilioRestClient(config.account_sid, config.auth_token)
 
 #info for braintree
 braintree.Configuration.configure(braintree.Environment.Sandbox,
-                                   merchant_id="yb48tgk36vmy35zw",
-	                     public_key = "ddqsprrw4377dv3f",
-                                   private_key="8873838a196e6d67b45a5d2d6ae142d9")
+                                  config.merchant_id,
+                                  config.public_key,
+                                  config.private_key)
 								 
 #send client token to client
 @app.route("/client_token", methods=["GET"])
